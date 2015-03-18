@@ -1,4 +1,5 @@
-service printer {
+service printer
+{
   socket_type = stream
   protocol = tcp
   wait = no

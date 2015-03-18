@@ -15,3 +15,5 @@ package 'xinetd'
 cookbook_file '/etc/xinetd.d/cups-lpd' do
   source 'cups-lpd.xinetd'
 end
+
+# TODO: `service xinetd reload`
