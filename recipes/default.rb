@@ -48,6 +48,8 @@ printers.map! do |x|
   phash
 end
 
+Chef::Log.info(printers.pretty_inspect)
+
 oldprinters = []
 
 printers.each do |px|
@@ -83,8 +85,10 @@ newprinters.each do |name,config|
   if oldprinters.include?(name)
     printers.each do |oldprinterhash|
       next if oldprinterhash['name'] != name
-      next if oldprinterhash['uri'] == config['uri']
-      execute cmdline
+      execute cmdline do
+        # skip printers where the URI did not change
+        not_if { oldprinterhash['uri'] == config['uri'] }
+      end
     end
   else
     execute cmdline
