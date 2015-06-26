@@ -114,6 +114,8 @@ SAMPLE format for printer entries:
 
 ##### Data bags
 
+Printers can also be defined via a Chef data bag.
+
 Set the attribute `node['cups']['printer_bag']` to the name of your data bag.
 
 Data bag entries use this format:
