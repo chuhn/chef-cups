@@ -1,6 +1,8 @@
 default['cups']['default_printer'] = nil
 default['cups']['loglevel'] = 'info'
 default['cups']['printers'] = []
+# a data bag to read printer configuration from:
+default['cups']['printer_bag'] = nil
 default['cups']['systemgroups'] = 'sys root'
 default['cups']['ports'] = [ 631 ]
 
