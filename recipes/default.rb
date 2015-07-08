@@ -45,9 +45,11 @@ lpstatcmd.run_command
 #
 #  Hash[lpstatcmd.stdout.scan(/^device for (.*?):\s(.*)/)] would also do the trick
 #   but as { name => device } instead of { name => { 'uri' => device } }
-#   the latter may be useful to add other info, eg. from lpoptions
+#   the latter may be useful to add other info, eg. from lpoptions:
 printers = lpstatcmd.stdout.scan(/^device for (.*?):\s(.*)/).inject({}) do |h,a|
   h[a[0]] = { 'uri' => a[1] }
+  # #take lpoptions output apart:
+  # Hash[`lpoptions -p a[0]`.scan(/(\S+?)=([^']*?|'.*?') /)]
   h
 end
 
