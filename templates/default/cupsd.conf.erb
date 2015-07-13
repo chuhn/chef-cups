@@ -14,7 +14,8 @@ LogLevel <%= node['cups']['loglevel'] %>
 SystemGroup <%= node['cups']['systemgroups'] %>
 
 <% if node['cups']['server_name'] -%>
-ServerName <%= node['cups']['server_name'] %>
+ServerName  <%= node['cups']['server_name'] %>
+ServerAlias <%= node['cups']['server_name'] %>
 <%- end %>
 
 <% if node['cups']['share_printers'] -%>
