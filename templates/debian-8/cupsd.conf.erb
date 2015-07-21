@@ -14,9 +14,16 @@ MaxLogSize 0
 # Printer Administrator user group:
 SystemGroup <%= node['cups']['systemgroups'] %>
 
+<% if node['cups']['server_name'] -%>
+ServerName  <%= node['cups']['server_name'] %>
+ServerAlias <%= node['cups']['server_name'] %>
+<%- end %>
+
 <% if node['cups']['share_printers'] -%>
 # Allow remote access
-Port 631
+<% node['cups']['ports'].each do |port| -%>
+Port <%= port %>
+<%- end %>
 
 # Show shared printers on the local network.
 Browsing On
@@ -25,8 +32,11 @@ Browsing On
 
 <% else -%>
 # Only listen for connections from the local machine.
-Listen localhost:631
+<% node['cups']['ports'].each do |port| -%>
+Listen localhost:<%= port %>
+<%- end %>
 <% end -%>
+
 Listen /var/run/cups/cups.sock
 
 
@@ -50,6 +60,7 @@ HostNameLookups On
 
 # Restrict access to the admin pages...
 <Location /admin>
+  Encryption Required
   Order allow,deny
 <%= "  Require user @SYSTEM" if node['cups']['admin']['auth_read'] %>
 <% node['cups']['admin']['acl'].each do |acl| -%>
