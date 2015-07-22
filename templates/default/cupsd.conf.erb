@@ -16,7 +16,7 @@ SystemGroup <%= node['cups']['systemgroups'] %>
 <% if node['cups']['server_name'] -%>
 ServerName  <%= node['cups']['server_name'] %>
 <%- end %>
-<% node['cups']['server_aliases'].each do |ali| -%>
+<% @aliases.each do |ali| -%>
 ServerAlias <%= ali %>
 <%- end %>
 

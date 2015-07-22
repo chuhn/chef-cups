@@ -19,10 +19,17 @@
 #
 package 'cups'
 
+aliases = node['cups']['server_aliases']
+
+if node['cups']['server_name'] and not aliases.include?(node['cups']['server_name'])
+  aliases << node['cups']['server_name']
+end
+
 template '/etc/cups/cupsd.conf' do
   owner 'root'
   group 'lp'
   mode '0640'
+  variables(:aliases => aliases)
 end
 
 service 'cups' do
