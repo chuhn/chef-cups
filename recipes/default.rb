@@ -19,7 +19,7 @@
 #
 package 'cups'
 
-aliases = node['cups']['server_aliases']
+aliases = node['cups']['server_aliases'].to_a
 
 if node['cups']['server_name'] and not aliases.include?(node['cups']['server_name'])
   aliases << node['cups']['server_name']
