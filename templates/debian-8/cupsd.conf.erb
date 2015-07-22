@@ -16,7 +16,9 @@ SystemGroup <%= node['cups']['systemgroups'] %>
 
 <% if node['cups']['server_name'] -%>
 ServerName  <%= node['cups']['server_name'] %>
-ServerAlias <%= node['cups']['server_name'] %>
+<%- end %>
+<% node['cups']['server_aliases'].each do |alias| -%>
+ServerAlias <%= alias %>
 <%- end %>
 
 <% if node['cups']['share_printers'] -%>
