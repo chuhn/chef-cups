@@ -6,6 +6,8 @@ default['cups']['printers'] = []
 default['cups']['printer_bag'] = nil
 default['cups']['systemgroups'] = 'sys root'
 default['cups']['ports'] = [ 631 ]
+default['cups']['server_name'] = node['fqdn']
+default['cups']['server_aliases'] = [ ]
 
 # ACLs for printer access:
 default['cups']['share_printers'] = [ '@LOCAL' ]
