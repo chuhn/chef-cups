@@ -86,7 +86,7 @@ newprinters.each do |name, config|
             "-v #{config['uri']}"
   if config['model']
     # don't specify -m ... for raw printers (model: raw)
-    cmdline << " -m #{config['model']}" unless config['model'] == 'raw'
+    cmdline << " -m '#{config['model']}'" unless config['model'] == 'raw'
   else
     if node['platform_family'] == 'debian'
       cmdline << ' -m lsb/usr/cupsfilters/textonly.ppd'
